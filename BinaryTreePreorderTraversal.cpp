@@ -23,6 +23,23 @@ public:
         preorderTraversal(root->right, path);
         
     }
+    
+    void preorderTraversalIterative(TreeNode* root, vector<int>& path) {
+        if (!root)
+            return;
+        stack<TreeNode*> nodeStack;
+        nodeStack.push(root);
+        while (!nodeStack.empty()) {
+            TreeNode* node = nodeStack.top();
+            path.push_back(node->val);
+            nodeStack.pop();
+            if (node->right)
+                 nodeStack.push(node->right);
+            if (node->left)
+                 nodeStack.push(node->left);
+        }
+    }
+        
     vector<int> preorderTraversal(TreeNode *root) {
         vector<int> path;
         preorderTraversal(root, path);
