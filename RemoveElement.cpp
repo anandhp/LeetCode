@@ -5,25 +5,11 @@
 **/
 class Solution {
 public:
-    void swap(int A[], int i, int j) {
-        int temp = A[i];
-        A[i] = A[j];
-        A[j] = temp;
-    }
-    
     int removeElement(int A[], int n, int elem) {
-        int length = n;
-        for (int i = 0; i < length; i++) {
-            if (A[i] == elem) {
-                for (int j = length - 1; j >= i && A[j] == elem; j--) {
-                    length--;
-                }
-                if (length < 0)
-                    break;
-                if (length > i) {
-                    swap(A, i, length - 1);
-                    length--;
-                }
+        int length = 0;
+        for (int i = 0; i < n; i++) {
+            if (A[i] != elem) {
+                A[length++] = A[i];
             }
         }
         return length;
