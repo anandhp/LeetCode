@@ -25,12 +25,14 @@ public:
 
         multimap<int, pair<int, int> > pairSumMap;
         multimap<int, pair<int, int> >::iterator mmit, it;
+        set<vector<int> > quadSet;
         
         sort(num.begin(), num.end());
         
         for (int i = 0; i < size - 1; i++) {
-            for (int j = i + 1; j < size; j++)
+            for (int j = i + 1; j < size; j++) {
                 pairSumMap.insert(make_pair(num[i] + num[j], make_pair(i, j)));
+            }
         }
         
         for (mmit = pairSumMap.begin(); mmit != pairSumMap.end(); ++mmit) {
@@ -53,10 +55,15 @@ public:
                         quad.push_back(num[p.second]);
                         quad.push_back(num[it->second.first]);
                         quad.push_back(num[it->second.second]);
-                        quads.push_back(quad);
+                        sort(quad.begin(), quad.end());
+                        quadSet.insert(quad);
                 }
             }
         }
+
+        for (set<vector<int> >::iterator sit = quadSet.begin(); sit != quadSet.end(); ++sit)
+            quads.push_back(*sit);
+
         return quads;
     }
 };

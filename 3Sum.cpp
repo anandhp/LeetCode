@@ -17,11 +17,11 @@ public:
     vector<vector<int> > threeSum(vector<int> &num) {
         int size = num.size();
         vector<vector<int> > sums;
+        set<vector<int> > sumSet;
         
         sort(num.begin(), num.end());
         
         for(int i = 0; i < size - 2; i++) {
-            //Check if its duplicate
             if (i > 0 && num[i] == num[i - 1])
                 continue;
 
@@ -32,7 +32,8 @@ public:
                     s.push_back(num[i]);
                     s.push_back(num[j]);                    
                     s.push_back(num[k]);
-                    sums.push_back(s);
+                    sort(s.begin(), s.end());
+                    sumSet.insert(s);
                     j++, k--;
                 } else if (sum > 0)
                     k--;
@@ -41,6 +42,9 @@ public:
             }
         }
         
+        for (set<vector<int> >::iterator sit = sumSet.begin(); sit != sumSet.end(); ++sit)
+            sums.push_back(*sit);
+            
         return sums;
     }
 };
