@@ -30,4 +30,20 @@ public:
         
         return profit;
     }
+    
+    int maxProfit(vector<int> &prices) {
+        int profit = 0;
+        int size = prices.size();
+
+        if (size == 0)
+            return profit;
+            
+        int minPrice = prices[0];
+        for (int i = 1; i < prices.size(); i++) {
+            minPrice = min(minPrice, prices[i]);
+            profit = max(prices[i] - minPrice, profit);
+        }
+        
+        return profit;
+    }
 };
