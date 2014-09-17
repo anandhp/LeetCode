@@ -8,7 +8,7 @@
 
 class Solution {
 public:
-    ListNode *detectCycle(ListNode *head) {
+    ListNode *detectCycleEx(ListNode *head) {
         set<ListNode*> nodeMap;
         ListNode* n = head;
         while (n) {
@@ -20,4 +20,29 @@ public:
         
         return NULL;
     }
+    //Better solution without using space
+    ListNode *detectCycle(ListNode *head) {
+        if (!head || !head->next)
+            return NULL;
+            
+        ListNode *slow = head, *fast = head;
+        
+        while (fast && fast->next) {
+            slow = slow->next;
+            fast = fast->next->next;
+            if (slow == fast)
+                break;
+        }
+        
+        if (slow != fast)
+            return NULL;
+        
+        slow = head;
+        while(slow != fast) {
+            slow = slow->next;
+            fast = fast->next;
+        }
+        
+        return slow;
+    }    
 };
